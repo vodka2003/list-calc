@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ListCalcを開く</title>
+</head>
+<body style="text-align: center; font-family: sans-serif; padding-top: 50px; background-color: #f2f2f7;">
+
+    <h2>ListCalcアプリを開いています...</h2>
+    <p style="color: #666;">もし自動で開かない場合は、下のボタンを押してください。</p>
+    
+    <button id="openBtn" style="margin-top: 20px; padding: 12px 24px; font-size: 18px; font-weight: bold; background-color: #007AFF; color: white; border: none; border-radius: 10px; cursor: pointer;">
+        アプリを開く
+    </button>
+
+    <script>
+        // 共有データをカスタムURLスキームへ引き渡す。
+        const urlParams = new URLSearchParams(window.location.search);
+        const dataParam = urlParams.get('data');
+
+        if (dataParam) {
+            const appUrl = "listcalc://import?data=" + encodeURIComponent(dataParam);
+
+            document.getElementById('openBtn').onclick = function() {
+                window.location.href = appUrl;
+            };
+
+            window.location.href = appUrl;
+            
+        } else {
+            document.body.innerHTML = "<h2 style='margin-top: 50px; color: red;'>データが見つかりません</h2>";
+        }
+    </script>
+</body>
+</html>
